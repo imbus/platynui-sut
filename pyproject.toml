@@ -1,6 +1,6 @@
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "platynui-sut"
@@ -11,7 +11,7 @@ requires-python = ">=3.8"
 license = "MIT"
 keywords = []
 authors = [
-  { name = "U.N. Owen", email = "void@some.where" },
+  { name = "Ziyad.Hajj-Hassan", email = "ziyad.hajj-hassan@example.com" },
 ]
 classifiers = [
   "Development Status :: 4 - Beta",
@@ -24,45 +24,54 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
-dependencies = []
+dependencies = [
+  "pyside6"
+]
 
 [project.urls]
 Documentation = "https://github.com/unknown/platynui-sut#readme"
 Issues = "https://github.com/unknown/platynui-sut/issues"
 Source = "https://github.com/unknown/platynui-sut"
 
-[tool.hatch.version]
-path = "src/platynui_sut/__about__.py"
-
-[tool.hatch.envs.default]
-dependencies = [
-  "coverage[toml]>=6.5",
-  "pytest",
-  "pyside6",
-  "pyinstaller"
+[dependency-groups]
+dev = [
+    "coverage[toml]>=7.6.1",
+    "pyinstaller>=6.16.0",
+    "pytest>=8.3.5",
 ]
-[tool.hatch.envs.default.scripts]
-start = "python -m platynui_sut.main"
-build = "pyinstaller --noconfirm --onefile src/platynui_sut/main.py --name platynui_sut"
-test = "pytest {args:tests}"
 
-[tool.hatch.build.targets.wheel]
-packages = ["src/platynui_sut"]
+# [tool.hatch.version]
+# path = "src/platynui_sut/__about__.py"
 
-[[tool.hatch.envs.all.matrix]]
-python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
+# [tool.hatch.envs.default]
+# dependencies = [
+#   "coverage[toml]>=6.5",
+#   "pytest",
+#   "pyside6",
+#   "pyinstaller"
+# ]
+# [tool.hatch.envs.default.scripts]
+# start = "python -m platynui_sut.main"
+# build = "pyinstaller --noconfirm --onefile src/platynui_sut/main.py --name platynui_sut"
+# test = "pytest {args:tests}"
 
-[tool.hatch.envs.types]
-dependencies = [
-  "mypy>=1.0.0",
-]
-[tool.hatch.envs.types.scripts]
-check = "mypy --install-types --non-interactive {args:src/platynui_sut tests}"
+# [tool.hatch.build.targets.wheel]
+# packages = ["src/platynui_sut"]
+
+# [[tool.hatch.envs.all.matrix]]
+# python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
+
+# [tool.hatch.envs.types]
+# dependencies = [
+#   "mypy>=1.0.0",
+# ]
+# [tool.hatch.envs.types.scripts]
+# check = "mypy --install-types --non-interactive {args:src/platynui_sut tests}"
 
 
-omit = [
-  "src/platynui_sut/__about__.py",
-]
+# omit = [
+#   "src/platynui_sut/__about__.py",
+# ]
 
 
 

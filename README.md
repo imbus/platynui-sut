@@ -8,10 +8,11 @@ Ein plattformübergreifendes **PySide6-Projekt**, das eine moderne Qt-UI demonst
 ## Voraussetzungen
 
 - **Python ≥ 3.10** (empfohlen 3.12 oder 3.13)  
-- **Hatch** installiert  
+- **uv** installiert  
   ```bash
-  pip install hatch
+  pip install uv
   ```
+  oder siehe [uv Installation](https://docs.astral.sh/uv/getting-started/installation/)
 - Optional: **Qt Designer** (z. B. über Qt Installer)
 
 ---
@@ -21,21 +22,21 @@ Ein plattformübergreifendes **PySide6-Projekt**, das eine moderne Qt-UI demonst
 Klonen oder herunterladen, dann im Projekt-Root:
 
 ```bash
-hatch env create
+uv sync
 ```
 
-Hatch erstellt automatisch die virtuelle Umgebung und installiert alle Dependencies 
+uv erstellt automatisch die virtuelle Umgebung und installiert alle Dependencies 
 
 ---
 
 ## Starten der Anwendung
 
 ```bash
-hatch run start
+uv run python -m platynui_sut.main
 ```
 
 Dieser Befehl:
-- aktiviert die Hatch-Umgebung  
+- aktiviert die uv-Umgebung  
 - startet `python -m platynui_sut.main`  
 - öffnet das Hauptfenster der Widgets-Gallery  
 
@@ -43,25 +44,24 @@ Dieser Befehl:
 
 
 
-## Häufige Befehle (Hatch-Skripte)
+## Häufige Befehle
 
 | Zweck | Befehl | Beschreibung |
 |-------|---------|---------------|
-| App starten | `hatch run start` | Startet GUI |
-| Tests ausführen | `hatch run test` | Führt Pytest aus |
-| Build-Artefakt (EXE) | `hatch run build` | Erstellt Single-File App mit PyInstaller |
-| UI-Dateien konvertieren | `pyside6-uic ui/controls_page.ui -o ui/ui_controls_page.py` | Übersetzt Designer-XML → Python |
+| App starten | `uv run python -m platynui_sut.main` | Startet GUI |
+| Tests ausführen | `uv run pytest` | Führt Pytest aus |
+| Build-Artefakt (EXE) | `uv run pyinstaller --noconfirm --onefile src/platynui_sut/main.py --name platynui_sut` | Erstellt Single-File App mit PyInstaller |
+| UI-Dateien konvertieren | `uv run pyside6-uic ui/controls_page.ui -o ui/ui_controls_page.py` | Übersetzt Designer-XML → Python |
 
 ---
 
 ## Beispiel: Projekt bauen
 
 ```bash
-hatch run build
+uv run pyinstaller --noconfirm --onefile src/platynui_sut/main.py --name platynui_sut
 ```
 
-Ergebnis: eine ausführbare Datei (z. B. `platynui_sut.exe`) im `dist/`-Verzeichnis.  
-PyInstaller wird dabei über das Hatch-Skript ausgeführt.
+Ergebnis: eine ausführbare Datei (z. B. `platynui_sut.exe`) im `dist/`-Verzeichnis.
 
 ---
 
@@ -75,10 +75,12 @@ PyInstaller wird dabei über das Hatch-Skript ausgeführt.
 
 ---
 
-## Beispiel: manuell im Hatch-Shell
+## Beispiel: manuell in der Shell
 
 ```bash
-hatch shell
+source .venv/bin/activate  # Linux/macOS
+# oder
+.venv\Scripts\activate     # Windows
 python -m platynui_sut.main
 ```
 
@@ -91,5 +93,4 @@ TODOs
 * Tabs
 * Tree
 * Toolbar
-* QML
-* uv statt hatch 
+* QML 
