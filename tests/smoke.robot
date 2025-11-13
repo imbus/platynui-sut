@@ -2,17 +2,30 @@
 Library    PlatynUI
 Library    Process
 
+
+*** Variables ***
+${APP_HANDLE}    value
+
+
+
 *** Test Cases ***
 Mouse Click Test
     [Documentation]    This test verifies mouse click functionality.
+    [Teardown]    Close Application
     Open Application
+    Sleep    3s    
     # Click Element    id=submit-button
     # Element Should Contain    id=result    Success
-    # Close Application
 
 
 *** Keywords ***
 Open Application
-    #Start Process    pwd
-    VAR    ${TEST}    uv run python -m platynui_sut.qml.main_qml
-    #Start Process    ${TEST}
+    ${handle}=    Start Process    uv    run    python    -m    platynui_sut.main_qml
+    ...    cwd=${EXECDIR}/..
+    ...    shell=True
+    Sleep    2s    # Warte bis App gestartet ist
+    Set Suite Variable    ${APP_HANDLE}    ${handle}
+
+Close Application
+    Terminate Process    ${APP_HANDLE}
+    Wait For Process    ${APP_HANDLE}    timeout=5s
