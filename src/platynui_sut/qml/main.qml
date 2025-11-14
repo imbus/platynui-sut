@@ -11,6 +11,150 @@ ApplicationWindow {
     // Apply Theme
     color: Theme.background
     
+    menuBar: MenuBar {
+        Menu {
+            id: fileMenu
+            objectName: "fileMenu"
+            title: "&File"
+            
+            MenuItem {
+                id: newAction
+                objectName: "newAction"
+                text: "&New"
+                icon.name: "document-new"
+                onTriggered: AppState.setStatus("New file")
+                Accessible.name: "New"
+                Accessible.role: Accessible.MenuItem
+            }
+            
+            MenuItem {
+                id: openAction
+                objectName: "openAction"
+                text: "&Open..."
+                icon.name: "document-open"
+                onTriggered: AppState.setStatus("Open file")
+                Accessible.name: "Open"
+                Accessible.role: Accessible.MenuItem
+            }
+            
+            MenuItem {
+                id: saveAction
+                objectName: "saveAction"
+                text: "&Save"
+                icon.name: "document-save"
+                onTriggered: AppState.setStatus("Save file")
+                Accessible.name: "Save"
+                Accessible.role: Accessible.MenuItem
+            }
+            
+            MenuSeparator {}
+            
+            MenuItem {
+                id: exitAction
+                objectName: "exitAction"
+                text: "E&xit"
+                icon.name: "application-exit"
+                onTriggered: Qt.quit()
+                Accessible.name: "Exit"
+                Accessible.role: Accessible.MenuItem
+            }
+        }
+        
+        Menu {
+            id: editMenu
+            objectName: "editMenu"
+            title: "&Edit"
+            
+            MenuItem {
+                id: undoAction
+                objectName: "undoAction"
+                text: "&Undo"
+                icon.name: "edit-undo"
+                onTriggered: AppState.setStatus("Undo")
+                Accessible.name: "Undo"
+                Accessible.role: Accessible.MenuItem
+            }
+            
+            MenuItem {
+                id: redoAction
+                objectName: "redoAction"
+                text: "&Redo"
+                icon.name: "edit-redo"
+                onTriggered: AppState.setStatus("Redo")
+                Accessible.name: "Redo"
+                Accessible.role: Accessible.MenuItem
+            }
+            
+            MenuSeparator {}
+            
+            MenuItem {
+                id: cutAction
+                objectName: "cutAction"
+                text: "Cu&t"
+                icon.name: "edit-cut"
+                onTriggered: AppState.setStatus("Cut")
+                Accessible.name: "Cut"
+                Accessible.role: Accessible.MenuItem
+            }
+            
+            MenuItem {
+                id: copyAction
+                objectName: "copyAction"
+                text: "&Copy"
+                icon.name: "edit-copy"
+                onTriggered: AppState.setStatus("Copy")
+                Accessible.name: "Copy"
+                Accessible.role: Accessible.MenuItem
+            }
+            
+            MenuItem {
+                id: pasteAction
+                objectName: "pasteAction"
+                text: "&Paste"
+                icon.name: "edit-paste"
+                onTriggered: AppState.setStatus("Paste")
+                Accessible.name: "Paste"
+                Accessible.role: Accessible.MenuItem
+            }
+        }
+        
+        Menu {
+            id: viewMenu
+            objectName: "viewMenu"
+            title: "&View"
+            
+            MenuItem {
+                id: darkModeAction
+                objectName: "darkModeAction"
+                text: "Dark Mode"
+                checkable: true
+                checked: AppState.dark
+                onTriggered: AppState.setDark(checked)
+                Accessible.name: "Dark Mode"
+                Accessible.role: Accessible.MenuItem
+            }
+        }
+        
+        Menu {
+            id: helpMenu
+            objectName: "helpMenu"
+            title: "&Help"
+            
+            MenuItem {
+                id: aboutAction
+                objectName: "aboutAction"
+                text: "&About"
+                icon.name: "help-about"
+                onTriggered: {
+                    stack.currentIndex = 4  // Switch to About page
+                    AppState.setStatus("About")
+                }
+                Accessible.name: "About"
+                Accessible.role: Accessible.MenuItem
+            }
+        }
+    }
+    
     // Update Theme when AppState changes
     Connections {
         target: AppState
@@ -87,9 +231,15 @@ ApplicationWindow {
                 }
                 
                 MouseArea {
+                    id: darkModeMouseArea
                     anchors.fill: parent
                     cursorShape: Qt.PointingHandCursor
+                    hoverEnabled: true
                     onClicked: AppState.setDark(!darkToggle.checked)
+                    
+                    ToolTip.visible: containsMouse
+                    ToolTip.text: darkToggle.checked ? "Switch to Light Mode" : "Switch to Dark Mode"
+                    ToolTip.delay: 500
                 }
             }
         }
