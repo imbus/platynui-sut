@@ -3,6 +3,12 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 Item {
+    // Apply enabled state to all controls
+    enabled: AppState.widgetsEnabled
+    
+    // Apply readonly: make interactive widgets read-only but keep them visually enabled
+    property bool isReadonly: AppState.widgetsReadonly
+    
     ScrollView {
         anchors.fill: parent
         anchors.margins: 16
@@ -29,17 +35,19 @@ Item {
                     id: primaryButton
                     objectName: "primaryButton"
                     text: "Primary Button with Icon"
+                    icon.name: "emblem-favorite"
                     Accessible.name: "Primary Button with Icon"
                     Accessible.role: Accessible.Button
-                    onClicked: AppState.setStatus("Regular button with icon clicked")
+                    onClicked: AppState.setStatus("Primary button clicked")
                 }
-                Switch {
-                    id: toggleBtn
-                    objectName: "toggleButton"
-                    text: checked ? "ON" : "OFF"
-                    Accessible.name: checked ? "Toggle ON" : "Toggle OFF"
-                    Accessible.role: Accessible.CheckBox
-                    onToggled: AppState.setStatus(checked ? "Toggled ON" : "Toggled OFF")
+                ToolButton {
+                    id: toolBtn
+                    objectName: "toolButton"
+                    text: "Tool"
+                    icon.name: "edit-copy"
+                    Accessible.name: "Tool Button"
+                    Accessible.role: Accessible.Button
+                    onClicked: AppState.setStatus("Tool Button clicked")
                 }
             }
         }
@@ -53,6 +61,7 @@ Item {
                     objectName: "checkedCheckbox"
                     text: "(checked)"
                     checked: true
+                    enabled: !isReadonly
                     Accessible.name: "Checked Checkbox"
                     Accessible.role: Accessible.CheckBox
                 }
@@ -60,6 +69,7 @@ Item {
                     id: comboBox
                     objectName: "selectComboBox"
                     model: ["Select Something", "Option A", "Option B"]
+                    enabled: !isReadonly
                     Accessible.name: "Select ComboBox"
                     Accessible.role: Accessible.ComboBox
                 }
@@ -67,10 +77,57 @@ Item {
                     id: flightSwitch
                     objectName: "flightModeSwitch"
                     text: "Flight Mode"
+                    enabled: !isReadonly
                     Accessible.name: "Flight Mode Switch"
                     Accessible.role: Accessible.CheckBox
                     onToggled: AppState.setStatus(checked ? "Flight Mode ON" : "Flight Mode OFF")
 
+                }
+            }
+        }
+
+        GroupBox {
+            Layout.fillWidth: true
+            title: "RadioButtons"
+            ColumnLayout {
+                spacing: 8
+                
+                ButtonGroup {
+                    id: sizeGroup
+                }
+                
+                RadioButton {
+                    id: radioSmall
+                    objectName: "radioSmall"
+                    text: "Small"
+                    checked: true
+                    enabled: !isReadonly
+                    ButtonGroup.group: sizeGroup
+                    Accessible.name: "Small"
+                    Accessible.role: Accessible.RadioButton
+                    onToggled: if (checked) AppState.setStatus("Size: Small")
+                }
+                
+                RadioButton {
+                    id: radioMedium
+                    objectName: "radioMedium"
+                    text: "Medium"
+                    enabled: !isReadonly
+                    ButtonGroup.group: sizeGroup
+                    Accessible.name: "Medium"
+                    Accessible.role: Accessible.RadioButton
+                    onToggled: if (checked) AppState.setStatus("Size: Medium")
+                }
+                
+                RadioButton {
+                    id: radioLarge
+                    objectName: "radioLarge"
+                    text: "Large"
+                    enabled: !isReadonly
+                    ButtonGroup.group: sizeGroup
+                    Accessible.name: "Large"
+                    Accessible.role: Accessible.RadioButton
+                    onToggled: if (checked) AppState.setStatus("Size: Large")
                 }
             }
         }
@@ -88,6 +145,8 @@ Item {
                         id: day
                         objectName: "daySpinBox"
                         from: 1; to: 31; value: 1
+                        editable: !isReadonly
+                        enabled: !isReadonly
                         Accessible.name: "Day"
                         Accessible.role: Accessible.SpinBox
                     }
@@ -96,6 +155,8 @@ Item {
                         id: month
                         objectName: "monthSpinBox"
                         from: 1; to: 12; value: 1
+                        editable: !isReadonly
+                        enabled: !isReadonly
                         Accessible.name: "Month"
                         Accessible.role: Accessible.SpinBox
                     }
@@ -104,6 +165,8 @@ Item {
                         id: year
                         objectName: "yearSpinBox"
                         from: 2000; to: 2099; value: 2025
+                        editable: !isReadonly
+                        enabled: !isReadonly
                         Accessible.name: "Year"
                         Accessible.role: Accessible.SpinBox
                     }
@@ -115,6 +178,8 @@ Item {
                         id: hour
                         objectName: "hourSpinBox"
                         from: 0; to: 23; value: 12
+                        editable: !isReadonly
+                        enabled: !isReadonly
                         Accessible.name: "Hour"
                         Accessible.role: Accessible.SpinBox
                     }
@@ -123,6 +188,8 @@ Item {
                         id: minute
                         objectName: "minuteSpinBox"
                         from: 0; to: 59; value: 0
+                        editable: !isReadonly
+                        enabled: !isReadonly
                         Accessible.name: "Minute"
                         Accessible.role: Accessible.SpinBox
                     }
@@ -153,6 +220,7 @@ Item {
                     objectName: "progressSlider"
                     Layout.fillWidth: true
                     from: 0; to: 100; value: 30
+                    enabled: !isReadonly
                     Accessible.name: "Progress Slider"
                     Accessible.role: Accessible.Slider
                 }
@@ -172,6 +240,7 @@ Item {
                     id: ind
                     objectName: "indeterminateCheckbox"
                     text: "indeterminate"
+                    enabled: !isReadonly
                     Accessible.name: "Indeterminate"
                     Accessible.role: Accessible.CheckBox
                 }

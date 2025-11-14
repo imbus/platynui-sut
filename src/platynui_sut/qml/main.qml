@@ -209,6 +209,26 @@ ApplicationWindow {
                 Layout.fillWidth: true
             }
             
+            CheckBox {
+                id: chkEnabled
+                objectName: "chkEnabled"
+                text: "Widgets enabled"
+                checked: AppState.widgetsEnabled
+                onToggled: AppState.setWidgetsEnabled(checked)
+                Accessible.name: "Widgets enabled"
+                Accessible.role: Accessible.CheckBox
+            }
+            
+            CheckBox {
+                id: chkReadonly
+                objectName: "chkReadonly"
+                text: "Widgets read-only"
+                checked: AppState.widgetsReadonly
+                onToggled: AppState.setWidgetsReadonly(checked)
+                Accessible.name: "Widgets read-only"
+                Accessible.role: Accessible.CheckBox
+            }
+            
             // Modern toggle button for dark mode
             Rectangle {
                 id: darkToggle
@@ -343,7 +363,7 @@ ApplicationWindow {
             anchors.fill: parent
             anchors.leftMargin: Theme.spacingM
             anchors.rightMargin: Theme.spacingM
-            text: AppState.status
+            text: "enabled=" + AppState.widgetsEnabled + "  readonly=" + AppState.widgetsReadonly + "  dark=" + AppState.dark + "  |  " + AppState.status
             color: Theme.textSecondary
             font.pixelSize: Theme.fontSizeSmall
             verticalAlignment: Text.AlignVCenter

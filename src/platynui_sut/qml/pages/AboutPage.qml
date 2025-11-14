@@ -3,6 +3,8 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 Item {
+    enabled: AppState.widgetsEnabled
+    
     ScrollView {
         anchors.fill: parent
         contentWidth: availableWidth

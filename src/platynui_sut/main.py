@@ -8,12 +8,20 @@ class AppState(QObject):
         super().__init__()
         self._dark = False
         self._status = "Ready"
+        self._widgets_enabled = True
+        self._widgets_readonly = False
 
     @Property(bool, notify=changed)
     def dark(self): return self._dark
 
     @Property(str, notify=changed)
     def status(self): return self._status
+
+    @Property(bool, notify=changed)
+    def widgetsEnabled(self): return self._widgets_enabled
+
+    @Property(bool, notify=changed)
+    def widgetsReadonly(self): return self._widgets_readonly
 
     @Slot(bool)
     def setDark(self, v: bool):
@@ -25,6 +33,18 @@ class AppState(QObject):
     def setStatus(self, text: str):
         if self._status != text:
             self._status = text
+            self.changed.emit()
+
+    @Slot(bool)
+    def setWidgetsEnabled(self, v: bool):
+        if self._widgets_enabled != v:
+            self._widgets_enabled = v
+            self.changed.emit()
+
+    @Slot(bool)
+    def setWidgetsReadonly(self, v: bool):
+        if self._widgets_readonly != v:
+            self._widgets_readonly = v
             self.changed.emit()
 
 def main():

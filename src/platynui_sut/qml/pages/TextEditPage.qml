@@ -3,6 +3,9 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 Item {
+    enabled: AppState.widgetsEnabled
+    property bool isReadonly: AppState.widgetsReadonly
+    
     ScrollView {
         anchors.fill: parent
         anchors.margins: 16
@@ -55,6 +58,7 @@ Item {
                                     wrapMode: TextEdit.WordWrap
                                     selectByMouse: true
                                     selectByKeyboard: true
+                                    readOnly: isReadonly
                                     
                                     Accessible.name: "Text Edit with Word Wrap"
                                     Accessible.role: Accessible.EditableText
@@ -141,6 +145,7 @@ Item {
                                     wrapMode: TextEdit.NoWrap
                                     selectByMouse: true
                                     selectByKeyboard: true
+                                    readOnly: isReadonly
                                     
                                     Accessible.name: "Text Edit without Word Wrap"
                                     Accessible.role: Accessible.EditableText
