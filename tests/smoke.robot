@@ -12,7 +12,8 @@ ${APP_HANDLE}    value
 Mouse Click Test
     [Documentation]    This test verifies mouse click functionality.
     [Teardown]    Close Application
-    Open Application
+    #Open Application
+    Activate      Window[@Name="Widgets Gallery (QML)"]//Button[@Name="Regular Button"]
     Sleep    3s    
     # Click Element    id=submit-button
     # Element Should Contain    id=result    Success

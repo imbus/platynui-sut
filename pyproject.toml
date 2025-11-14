@@ -11,7 +11,7 @@ requires-python = ">=3.13"
 license = "MIT"
 keywords = []
 authors = [
-  { name = "Ziyad.Hajj-Hassan", email = "ziyad.hajj-hassan@example.com" },
+  { name = "Ziyad Hajj Hassan" },
 ]
 classifiers = [
   "Development Status :: 4 - Beta",
@@ -28,6 +28,7 @@ classifiers = [
 ]
 dependencies = [
   "pyside6",
+  "robotframework",
   "robotframework-platynui"
 ]
 
