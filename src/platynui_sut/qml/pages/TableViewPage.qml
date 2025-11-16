@@ -18,11 +18,17 @@ Item {
             GroupBox {
                 Layout.fillWidth: true
                 title: "Filter"
+                Accessible.name: "Filter Group"
+                Accessible.role: Accessible.Grouping
                 
                 RowLayout {
                     spacing: 12
                     
-                    Label { text: "Filter by Header 1:" }
+                    Label { 
+                        text: "Filter by Header 1:" 
+                        Accessible.name: "Filter by Header 1 Label"
+                        Accessible.role: Accessible.StaticText
+                    }
                     TextField {
                         id: filterField
                         objectName: "filterTextField"
@@ -43,6 +49,8 @@ Item {
                 Layout.fillHeight: true
                 Layout.minimumHeight: 400
                 title: "Table"
+                Accessible.name: "Table Group"
+                Accessible.role: Accessible.Grouping
                 
                 ColumnLayout {
                     anchors.fill: parent

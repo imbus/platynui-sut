@@ -82,6 +82,8 @@ Item {
                 Layout.alignment: Qt.AlignHCenter
                 Layout.preferredWidth: Math.min(600, parent.width - 32)
                 title: "About"
+                Accessible.name: "About Group"
+                Accessible.role: Accessible.Grouping
                 
                 ColumnLayout {
                     anchors.fill: parent
@@ -94,6 +96,8 @@ Item {
                         Label {
                             text: "📦"
                             font.pixelSize: 24
+                            Accessible.name: "Package Icon"
+                            Accessible.role: Accessible.StaticText
                         }
                         
                         ColumnLayout {
@@ -125,6 +129,8 @@ Item {
                         Label {
                             text: "⚡"
                             font.pixelSize: 24
+                            Accessible.name: "Lightning Icon"
+                            Accessible.role: Accessible.StaticText
                         }
                         
                         ColumnLayout {
@@ -156,6 +162,8 @@ Item {
                         Label {
                             text: "🎯"
                             font.pixelSize: 24
+                            Accessible.name: "Target Icon"
+                            Accessible.role: Accessible.StaticText
                         }
                         
                         ColumnLayout {

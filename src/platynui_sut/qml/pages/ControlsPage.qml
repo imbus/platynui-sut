@@ -21,6 +21,9 @@ Item {
         GroupBox {
             Layout.fillWidth: true
             title: "Buttons"
+            Accessible.name: "Buttons Group"
+            Accessible.role: Accessible.Grouping
+            
             RowLayout {
                 Button { 
                     id: regularButton
@@ -55,6 +58,9 @@ Item {
         GroupBox {
             Layout.fillWidth: true
             title: "CheckBox - ComboBox - Switch"
+            Accessible.name: "CheckBox - ComboBox - Switch Group"
+            Accessible.role: Accessible.Grouping
+            
             RowLayout {
                 CheckBox { 
                     id: checkedBox
@@ -89,6 +95,9 @@ Item {
         GroupBox {
             Layout.fillWidth: true
             title: "RadioButtons"
+            Accessible.name: "RadioButtons Group"
+            Accessible.role: Accessible.Grouping
+            
             ColumnLayout {
                 spacing: 8
                 
@@ -136,11 +145,22 @@ Item {
         GroupBox {
             Layout.fillWidth: true
             title: "Date/Time"
+            Accessible.name: "Date/Time Group"
+            Accessible.role: Accessible.Grouping
+            
             ColumnLayout {
                 spacing: 8
-                Label { text: "Date:" }
+                Label { 
+                    text: "Date:" 
+                    Accessible.name: "Date Label"
+                    Accessible.role: Accessible.StaticText
+                }
                 RowLayout {
-                    Label { text: "Day:" }
+                    Label { 
+                        text: "Day:" 
+                        Accessible.name: "Day Label"
+                        Accessible.role: Accessible.StaticText
+                    }
                     SpinBox { 
                         id: day
                         objectName: "daySpinBox"
@@ -150,7 +170,11 @@ Item {
                         Accessible.name: "Day"
                         Accessible.role: Accessible.SpinBox
                     }
-                    Label { text: "Month:" }
+                    Label { 
+                        text: "Month:" 
+                        Accessible.name: "Month Label"
+                        Accessible.role: Accessible.StaticText
+                    }
                     SpinBox { 
                         id: month
                         objectName: "monthSpinBox"
@@ -160,7 +184,11 @@ Item {
                         Accessible.name: "Month"
                         Accessible.role: Accessible.SpinBox
                     }
-                    Label { text: "Year:" }
+                    Label { 
+                        text: "Year:" 
+                        Accessible.name: "Year Label"
+                        Accessible.role: Accessible.StaticText
+                    }
                     SpinBox { 
                         id: year
                         objectName: "yearSpinBox"
@@ -171,9 +199,17 @@ Item {
                         Accessible.role: Accessible.SpinBox
                     }
                 }
-                Label { text: "Time:" }
+                Label { 
+                    text: "Time:" 
+                    Accessible.name: "Time Label"
+                    Accessible.role: Accessible.StaticText
+                }
                 RowLayout {
-                    Label { text: "Hour:" }
+                    Label { 
+                        text: "Hour:" 
+                        Accessible.name: "Hour Label"
+                        Accessible.role: Accessible.StaticText
+                    }
                     SpinBox { 
                         id: hour
                         objectName: "hourSpinBox"
@@ -183,7 +219,11 @@ Item {
                         Accessible.name: "Hour"
                         Accessible.role: Accessible.SpinBox
                     }
-                    Label { text: "Min:" }
+                    Label { 
+                        text: "Min:" 
+                        Accessible.name: "Minute Label"
+                        Accessible.role: Accessible.StaticText
+                    }
                     SpinBox { 
                         id: minute
                         objectName: "minuteSpinBox"
@@ -211,6 +251,9 @@ Item {
         GroupBox {
             Layout.fillWidth: true
             title: "Slider / Progress"
+            Accessible.name: "Slider / Progress Group"
+            Accessible.role: Accessible.Grouping
+            
             ColumnLayout {
                 width: parent.width
                 spacing: 8
@@ -247,7 +290,11 @@ Item {
             }
         }
 
-        Label { text: "Click a control to see action…" }
+        Label { 
+            text: "Click a control to see action…" 
+            Accessible.name: "Instruction: Click a control to see action"
+            Accessible.role: Accessible.StaticText
+        }
         Item { Layout.fillHeight: true } // Stretch
         }
     }

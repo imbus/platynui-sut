@@ -18,11 +18,17 @@ Item {
             GroupBox {
                 Layout.fillWidth: true
                 title: "Scroll Bar Policy"
+                Accessible.name: "Scroll Bar Policy Group"
+                Accessible.role: Accessible.Grouping
                 
                 RowLayout {
                     spacing: 12
                     
-                    Label { text: "Vertical:" }
+                    Label { 
+                        text: "Vertical:" 
+                        Accessible.name: "Vertical Label"
+                        Accessible.role: Accessible.StaticText
+                    }
                     ComboBox {
                         id: verticalPolicyCombo
                         objectName: "verticalPolicyCombo"
@@ -32,7 +38,11 @@ Item {
                         Accessible.role: Accessible.ComboBox
                     }
                     
-                    Label { text: "Horizontal:" }
+                    Label { 
+                        text: "Horizontal:" 
+                        Accessible.name: "Horizontal Label"
+                        Accessible.role: Accessible.StaticText
+                    }
                     ComboBox {
                         id: horizontalPolicyCombo
                         objectName: "horizontalPolicyCombo"
@@ -51,6 +61,8 @@ Item {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 title: "ListViews"
+                Accessible.name: "ListViews Group"
+                Accessible.role: Accessible.Grouping
                 
                 RowLayout {
                     anchors.fill: parent
