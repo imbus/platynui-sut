@@ -1,32 +1,26 @@
-***settings***
+*** Settings ***
+Documentation     Smoke Tests and Basic Interaction
 Library    PlatynUI
-Library    Process
+Resource    ressources/app_keywords.resource
 
-
-*** Variables ***
-${APP_HANDLE}    value
-
+Suite Setup    Open Application
+Suite Teardown    Close Application
 
 
 *** Test Cases ***
+Application Starts Successfully
+    [Documentation]    Verify application launches and main window is accessible
+    [Tags]    smoke
+    Ensure Exists    ${WINDOW_LOCATOR}
+    ${is_active}=    Is Active    ${WINDOW_LOCATOR}
+    Should Be True    ${is_active}
+
 Mouse Click Test
     [Documentation]    This test verifies mouse click functionality.
-    [Teardown]    Close Application
+
     #Open Application
-    Activate      Window[@Name="Widgets Gallery (QML)"]//Button[@Name="Regular Button"]
-    Sleep    3s    
+    Activate      ${WINDOW_LOCATOR}//Button[@Name="Regular Button"]
+
     # Click Element    id=submit-button
     # Element Should Contain    id=result    Success
 
-
-*** Keywords ***
-Open Application
-    ${handle}=    Start Process    uv    run    python    -m    platynui_sut.main_qml
-    ...    cwd=${EXECDIR}/..
-    ...    shell=True
-    Sleep    2s    # Warte bis App gestartet ist
-    Set Suite Variable    ${APP_HANDLE}    ${handle}
-
-Close Application
-    Terminate Process    ${APP_HANDLE}
-    Wait For Process    ${APP_HANDLE}    timeout=5s

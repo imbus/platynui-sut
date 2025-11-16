@@ -12,10 +12,15 @@ ApplicationWindow {
     color: Theme.background
     
     menuBar: MenuBar {
+        Accessible.name: "Main Menu Bar"
+        Accessible.role: Accessible.MenuBar
+        
         Menu {
             id: fileMenu
             objectName: "fileMenu"
             title: "&File"
+            Accessible.name: "File Menu"
+            Accessible.role: Accessible.Menu
             
             MenuItem {
                 id: newAction
@@ -64,6 +69,8 @@ ApplicationWindow {
             id: editMenu
             objectName: "editMenu"
             title: "&Edit"
+            Accessible.name: "Edit Menu"
+            Accessible.role: Accessible.Menu
             
             MenuItem {
                 id: undoAction
@@ -122,6 +129,8 @@ ApplicationWindow {
             id: viewMenu
             objectName: "viewMenu"
             title: "&View"
+            Accessible.name: "View Menu"
+            Accessible.role: Accessible.Menu
             
             MenuItem {
                 id: darkModeAction
@@ -139,6 +148,8 @@ ApplicationWindow {
             id: helpMenu
             objectName: "helpMenu"
             title: "&Help"
+            Accessible.name: "Help Menu"
+            Accessible.role: Accessible.Menu
             
             MenuItem {
                 id: aboutAction
@@ -184,10 +195,11 @@ ApplicationWindow {
     }
 
     header: ToolBar {
+        Accessible.name: "Main Toolbar"
+        Accessible.role: Accessible.ToolBar
+        
         background: Rectangle {
             color: Theme.surface
-            Accessible.name: "status_toolbar"
-            Accessible.role: Accessible.ToolBar
             
             Rectangle {
                 anchors.bottom: parent.bottom
@@ -209,6 +221,8 @@ ApplicationWindow {
                 font.bold: true
                 color: Theme.text
                 Layout.fillWidth: true
+                Accessible.name: "Application Title: PlatynUI SUT - Widgets Gallery"
+                Accessible.role: Accessible.StaticText
             }
             
             CheckBox {
@@ -234,6 +248,7 @@ ApplicationWindow {
             // Modern toggle button for dark mode
             Rectangle {
                 id: darkToggle
+                objectName: "darkModeToggle"
                 width: 40
                 height: 40
                 radius: Theme.radiusM
@@ -241,6 +256,10 @@ ApplicationWindow {
                 property bool checked: AppState.dark
                 
                 color: checked ? Theme.primary : Theme.surfaceVariant
+                
+                Accessible.name: "Dark Mode Toggle"
+                Accessible.role: Accessible.Button
+                Accessible.description: checked ? "Dark mode active" : "Light mode active"
                 
                 Behavior on color {
                     ColorAnimation { duration: Theme.animationNormal }
@@ -377,6 +396,9 @@ ApplicationWindow {
     footer: ToolBar {
         height: 35
         
+        Accessible.name: "Status Bar"
+        Accessible.role: Accessible.StatusBar
+        
         background: Rectangle {
             color: Theme.surface
             
@@ -396,6 +418,8 @@ ApplicationWindow {
             color: Theme.textSecondary
             font.pixelSize: Theme.fontSizeSmall
             verticalAlignment: Text.AlignVCenter
+            Accessible.name: "Status: " + AppState.status
+            Accessible.role: Accessible.StaticText
         }
     }
 }

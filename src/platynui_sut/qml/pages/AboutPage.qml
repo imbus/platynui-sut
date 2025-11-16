@@ -20,28 +20,18 @@ Item {
                 Layout.alignment: Qt.AlignHCenter
                 width: 150
                 height: 150
-                radius: 75
+                radius: 75  // Perfekt rund (width/2)
                 color: palette.button
                 border.color: palette.mid
                 border.width: 2
+                clip: true  // Schneidet Bild an runden Ecken ab
                 
-                // Placeholder Icon (you can replace with an actual image)
-                Text {
-                    anchors.centerIn: parent
-                    text: "🎨"
-                    font.pixelSize: 80
-                }
-                
-                // To use an actual image, uncomment this and add your image to assets/
-                /*
                 Image {
                     anchors.fill: parent
-                    anchors.margins: 10
-                    source: "../../assets/logo.png"
-                    fillMode: Image.PreserveAspectFit
+                    source: "../../assets/daniel_biehl.png"
+                    fillMode: Image.PreserveAspectCrop  // Füllt den Kreis vollständig
                     smooth: true
                 }
-                */
                 
                 Accessible.name: "Application Logo"
                 Accessible.role: Accessible.Graphic
@@ -52,12 +42,12 @@ Item {
             // Title
             Label {
                 Layout.alignment: Qt.AlignHCenter
-                text: "<b>PlatynUI SUT - Widgets Gallery</b>"
+                text: "<b>PlatynUI SUT - Very Early Stage</b>"
                 font.pixelSize: 24
                 textFormat: Text.RichText
                 horizontalAlignment: Text.AlignHCenter
                 
-                Accessible.name: "Title: PlatynUI SUT - Widgets Gallery"
+                Accessible.name: "Title: PlatynUI SUT - Very Early Stage"
                 Accessible.role: Accessible.Heading
             }
             
