@@ -186,6 +186,8 @@ ApplicationWindow {
     header: ToolBar {
         background: Rectangle {
             color: Theme.surface
+            Accessible.name: "status_toolbar"
+            Accessible.role: Accessible.ToolBar
             
             Rectangle {
                 anchors.bottom: parent.bottom
