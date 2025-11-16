@@ -29,7 +29,7 @@ Item {
                     id: regularButton
                     objectName: "regularButton"
                     text: "Regular Button"
-                    Accessible.name: "Regulari Button"
+                    Accessible.name: "Regular Button"
                     Accessible.description: "A regular button for testing"
                     Accessible.role: Accessible.Button
                     onClicked: AppState.setStatus("Regular clicked")

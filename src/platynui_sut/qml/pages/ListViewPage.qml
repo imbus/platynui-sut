@@ -72,7 +72,7 @@ Item {
                     Frame {
                         Layout.fillWidth: true
                         Layout.fillHeight: true
-                        Layout.minimumHeight: 300
+                        Layout.minimumHeight: 500
                         
                         ScrollView {
                             id: leftScrollView

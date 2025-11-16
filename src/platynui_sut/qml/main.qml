@@ -271,12 +271,20 @@ ApplicationWindow {
         anchors.fill: parent
         orientation: Qt.Horizontal
         
+        Accessible.name: "Main Split View"
+        Accessible.role: Accessible.Pane
+        
         // Modern Navigation Sidebar
         Rectangle {
+            id: navigationPane
+            objectName: "navigationPane"
             SplitView.minimumWidth: 180
             SplitView.preferredWidth: 200
             SplitView.maximumWidth: 300
             color: Theme.surface
+            
+            Accessible.name: "Navigation Sidebar"
+            Accessible.role: Accessible.Pane
             
             // Right border
             Rectangle {
@@ -288,15 +296,20 @@ ApplicationWindow {
             
             ListView {
                 id: nav
+                objectName: "navigationList"
                 anchors.fill: parent
                 anchors.margins: Theme.spacingS
                 spacing: Theme.spacingXs
                 clip: true
                 
+                Accessible.name: "Navigation Menu"
+                Accessible.role: Accessible.List
+                
                 model: ["Controls", "ListView", "TableView", "TextEdit", "About"]
                 
                 delegate: Rectangle {
                     id: navItem
+                    objectName: "navItem_" + modelData
                     width: nav.width - Theme.spacingM
                     height: 40
                     radius: Theme.radiusM
@@ -306,6 +319,10 @@ ApplicationWindow {
                     
                     color: checked ? Theme.primary : 
                            hovered ? Theme.surfaceVariant : "transparent"
+                    
+                    Accessible.name: modelData + " Page"
+                    Accessible.role: Accessible.ListItem
+                    Accessible.description: checked ? "Selected" : "Not selected"
                     
                     Behavior on color {
                         ColorAnimation { duration: Theme.animationFast }
@@ -332,12 +349,22 @@ ApplicationWindow {
         }
         
         Rectangle {
+            id: contentPane
+            objectName: "contentPane"
             SplitView.fillWidth: true
             color: Theme.background
             
+            Accessible.name: "Content Area"
+            Accessible.role: Accessible.Pane
+            
             StackLayout {
                 id: stack
+                objectName: "pageStack"
                 anchors.fill: parent
+                
+                Accessible.name: "Page Stack"
+                Accessible.role: Accessible.PageTabList
+                
                 ControlsPage {}
                 ListViewPage {}
                 TableViewPage {}
