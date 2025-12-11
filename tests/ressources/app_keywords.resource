@@ -6,15 +6,17 @@ Library             PlatynUI
 
 
 *** Variables ***
-${APP_HANDLE}           value
-${APP_NAME}             Widgets Gallery (QML)
-${WINDOW}               Window[@Name="${APP_NAME}"]
-${REGULAR_BUTTON}       ${WINDOW}//Button[@Name="Regular Button"]
-${CHECKED_CHECKBOX}     ${WINDOW}//CheckBox[@Name="Checked Checkbox"]
-${SELECT_COMBOBOX}      ${WINDOW}//ComboBox[@Name="Select ComboBox"]
-${FILTER_TEXTFIELD}     ${WINDOW}//Edit[@Name="Filter by Header 1"]
-${PROGRESS_SLIDER}      ${WINDOW}//Slider[@Name="Progress Slider"]
-${STATUS_LABEL}         ${WINDOW}//Text[@Name="Status Bar Label"]
+${APP_HANDLE}               value
+${APP_NAME}                 Widgets Gallery (QML)
+${WINDOW}                   Window[@Name="${APP_NAME}"]
+${REGULAR_BUTTON}           ${WINDOW}//Button[@Name="Regular Button"]
+${CHECKED_CHECKBOX}         ${WINDOW}//CheckBox[@Name="Checked Checkbox"]
+${SELECT_COMBOBOX}          ${WINDOW}//ComboBox[@Name="Select ComboBox"]
+${FILTER_TEXTFIELD}         ${WINDOW}//Edit[@Name="Filter by Header 1"]
+${PROGRESS_SLIDER}          ${WINDOW}//Slider[@Name="Progress Slider"]
+${STATUS_LABEL}             ${WINDOW}//Text[contains(@Name, "Status")]
+${READ_ONLY_CHECKBOX}       ${WINDOW}//CheckBox[@Name="Widgets read-only"]
+${SMALL_RADIO_BTN}          ${WINDOW}//RadioButton[@Name="Small"]
 
 
 *** Keywords ***

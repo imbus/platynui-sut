@@ -8,11 +8,38 @@ Suite Teardown    Close Application
 
 
 *** Test Cases ***
+### Keyword 'Mouse Click' Tests ###
+Check if Mouse Click Works
+    [Documentation]    Verify that clicking works
+    [Tags]    keyword    mouseclick
+    Navigate To Controls Page
+    Mouse Click    ${REGULAR_BUTTON}
+    Get Property Value    ${STATUS_LABEL}    Name    should be   Status: Regular clicked
+
+
+
+### Keyword 'Get Property Value' Tests ###
+check if Get Property Value works
+    [Documentation]    Verify Get Property Value retrieves correct Value
+    [Tags]    keyword    getpropertyvalue
+    Navigate To Controls Page
+    Mouse Click    ${READ_ONLY_CHECKBOX}
+    
+    Get Property Value    ${SMALL_RADIO_BTN}    IsEnabled    should be   ${False}
+   
+
+### Keyword 'Ensure Exists' Tests ###
+
+### Keyword 'Is Active' Tests ###
+
+
+
+
 Application Starts Successfully
     [Documentation]    Verify application launches and main window is accessible
     [Tags]    smoke
     Ensure Exists    ${WINDOW}
-    ${is_active}=    Is Active    ${WINDOW}
+    ${is_active}=    Is Active    ${WINDOW}    
     Should Be True    ${is_active}
 
 Mouse Click Test
