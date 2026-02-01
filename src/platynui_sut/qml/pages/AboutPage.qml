@@ -28,7 +28,7 @@ Item {
                 
                 Image {
                     anchors.fill: parent
-                    source: "../../assets/daniel_biehl.png"
+                    source: "../../assets/Platynui.png"
                     fillMode: Image.PreserveAspectCrop  // Füllt den Kreis vollständig
                     smooth: true
                 }

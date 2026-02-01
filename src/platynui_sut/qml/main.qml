@@ -216,7 +216,7 @@ ApplicationWindow {
             spacing: Theme.spacingM
             
             Label {
-                text: "PlatynUI SUT - Widgets Gallery"
+                text: "PlatynUI Test System"
                 font.pixelSize: Theme.fontSizeLarge
                 font.bold: true
                 color: Theme.text
@@ -324,7 +324,7 @@ ApplicationWindow {
                 Accessible.name: "Navigation Menu"
                 Accessible.role: Accessible.List
                 
-                model: ["Controls", "ListView", "TableView", "TextEdit", "About"]
+                model: ["Controls", "ListView", "TableView", "TextEdit", "Mouse", "About"]
                 
                 delegate: Rectangle {
                     id: navItem
@@ -388,6 +388,7 @@ ApplicationWindow {
                 ListViewPage {}
                 TableViewPage {}
                 TextEditPage {}
+                MousePage {}
                 AboutPage {}
             }
         }

@@ -9,6 +9,7 @@ from platynui_sut.pages import (
     ListViewPage,
     TableViewPage,
     TextEditPage,
+    MousePage,
     AboutPage,
 )
 
@@ -18,6 +19,7 @@ PAGES = [
     ("ListView", ListViewPage),
     ("TableView", TableViewPage),
     ("TextEdit", TextEditPage),
+    ("Mouse", MousePage),
     ("About", AboutPage),
 ]
 
