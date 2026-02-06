@@ -157,7 +157,7 @@ ApplicationWindow {
                 text: "&About"
                 icon.name: "help-about"
                 onTriggered: {
-                    stack.currentIndex = 4  // Switch to About page
+                    stack.currentIndex = 5  // Switch to About page
                     AppState.setStatus("About")
                 }
                 Accessible.name: "About"
