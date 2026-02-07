@@ -32,7 +32,7 @@ Item {
                     Accessible.name: "Regular Button"
                     Accessible.description: "A regular button for testing"
                     Accessible.role: Accessible.Button
-                    onClicked: AppState.setStatus("Regular clicked")
+                    onClicked: AppState.setStatus("Regular button clicked")
                 }
                 Button { 
                     id: primaryButton
@@ -266,6 +266,7 @@ Item {
                     enabled: !isReadonly
                     Accessible.name: "Progress Slider"
                     Accessible.role: Accessible.Slider
+                    onValueChanged: AppState.setStatus("Slider: " + Math.round(value))
                 }
                 
                 ProgressBar { 
