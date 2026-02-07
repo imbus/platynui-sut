@@ -195,6 +195,10 @@ Item {
                                 if (activeFocus) {
                                     AppState.setStatus("Text edited (With Wrap): " + text.length + " chars")
                                 }
+                                // Easter Egg: Check for secret phrase
+                                if (text.includes("Very very early stage!")) {
+                                    AppState.setEasterEggActivated(true)
+                                }
                             }
                             
                             Menu {

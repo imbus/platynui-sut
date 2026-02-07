@@ -5,11 +5,16 @@ import QtQuick.Layouts
 Item {
     enabled: AppState.widgetsEnabled
     
+    // Easter Egg state
+    property int easterEggClicks: 7
+    property bool easterEggRevealed: false
+    
     // Reset function - About page has no user-modifiable state
     // but we include this for consistency and potential future use
     function reset() {
-        // About page has no controls to reset
-        // This is just a placeholder for consistency or in the future added Elements
+        // Reset Easter Egg
+        easterEggClicks = 7
+        easterEggRevealed = false
     }
     
     // Connect to AppState resetRequested signal
@@ -42,10 +47,19 @@ Item {
                 clip: true  // Schneidet Bild an runden Ecken ab
                 
                 Image {
+                    id: logoImage
                     anchors.fill: parent
-                    source: "../../assets/Platynui.png"
+                    source: easterEggRevealed ? "../../assets/daniel_biehl.png" : "../../assets/Platynui.png"
                     fillMode: Image.PreserveAspectCrop  // Füllt den Kreis vollständig
                     smooth: true
+                    
+                    Behavior on source {
+                        SequentialAnimation {
+                            NumberAnimation { target: logoImage; property: "opacity"; to: 0; duration: 300 }
+                            PropertyAction { target: logoImage; property: "source" }
+                            NumberAnimation { target: logoImage; property: "opacity"; to: 1; duration: 300 }
+                        }
+                    }
                 }
                 
                 Accessible.name: "Application Logo"
@@ -57,12 +71,12 @@ Item {
             // Title
             Label {
                 Layout.alignment: Qt.AlignHCenter
-                text: "<b>PlatynUI SUT - Very Early Stage</b>"
+                text: easterEggRevealed ? "<b>PlatynUI SUT - Very Early Stage</b>" : "<b>PlatynUI SUT</b>"
                 font.pixelSize: 24
                 textFormat: Text.RichText
                 horizontalAlignment: Text.AlignHCenter
                 
-                Accessible.name: "Title: PlatynUI SUT - Very Early Stage"
+                Accessible.name: easterEggRevealed ? "Title: PlatynUI SUT - Very Early Stage" : "Title: PlatynUI SUT"
                 Accessible.role: Accessible.Heading
             }
             
@@ -228,6 +242,54 @@ Item {
                         Qt.openUrlExternally("https://github.com/imbus/robotframework-PlatynUI")
                         AppState.setStatus("Opening PlatynUI documentation...")
                     }
+                }
+            }
+            
+            // Easter Egg Button
+            Button {
+                id: easterEggButton
+                objectName: "easterEggButton"
+                Layout.alignment: Qt.AlignHCenter
+                Layout.topMargin: 16
+                visible: AppState.easterEggActivated && !easterEggRevealed
+                text: "(" + easterEggClicks + ") Clicks to reveal PlatynUI Creator"
+                
+                Accessible.name: "Easter Egg Button"
+                Accessible.role: Accessible.Button
+                
+                onClicked: {
+                    easterEggClicks--
+                    if (easterEggClicks <= 0) {
+                        easterEggRevealed = true
+                        AppState.setStatus("🎉 PlatynUI Creator revealed: Daniel Biehl!")
+                    } else {
+                        AppState.setStatus("Easter Egg: " + easterEggClicks + " clicks remaining...")
+                    }
+                }
+                
+                // Animation when button appears
+                opacity: 0
+                Component.onCompleted: {
+                    if (visible) {
+                        fadeIn.start()
+                    }
+                }
+                
+                Connections {
+                    target: AppState
+                    function onEasterEggActivatedChanged() {
+                        if (AppState.easterEggActivated && !easterEggRevealed) {
+                            fadeIn.start()
+                        }
+                    }
+                }
+                
+                NumberAnimation {
+                    id: fadeIn
+                    target: easterEggButton
+                    property: "opacity"
+                    to: 1
+                    duration: 500
                 }
             }
             

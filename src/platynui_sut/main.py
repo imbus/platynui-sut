@@ -12,6 +12,7 @@ class AppState(QObject):
         self._status = "Ready"
         self._widgets_enabled = True
         self._widgets_readonly = False
+        self._easter_egg_activated = False
 
     @Property(bool, notify=changed)
     def dark(self): return self._dark
@@ -24,6 +25,9 @@ class AppState(QObject):
 
     @Property(bool, notify=changed)
     def widgetsReadonly(self): return self._widgets_readonly
+
+    @Property(bool, notify=changed)
+    def easterEggActivated(self): return self._easter_egg_activated
 
     @Slot(bool)
     def setDark(self, v: bool):
@@ -49,6 +53,12 @@ class AppState(QObject):
             self._widgets_readonly = v
             self.changed.emit()
 
+    @Slot(bool)
+    def setEasterEggActivated(self, v: bool):
+        if self._easter_egg_activated != v:
+            self._easter_egg_activated = v
+            self.changed.emit()
+
     @Slot()
     def reset(self):
         """Reset application to initial state"""
@@ -56,6 +66,7 @@ class AppState(QObject):
         self._status = "Ready"
         self._widgets_enabled = True
         self._widgets_readonly = False
+        self._easter_egg_activated = False
         self.resetRequested.emit()
         self.changed.emit()
 
