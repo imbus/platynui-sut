@@ -49,6 +49,33 @@ Navigate To TextEdit Page
     [Documentation]    Navigate to TextEdit page
     Mouse Click    ${WINDOW}//ListItem[@Name="TextEdit Page"]
 
+Set Slider Value
+    [Documentation]    Set the progress slider to a specific value (0-100)
+    [Arguments]    ${target_value}
+
+    # Validate input value
+    Should Be True    ${target_value} >= 0 and ${target_value} <= 100    Value must be between 0 and 100
+
+    # Get slider dimensions to calculate correct position
+    ${rect}=    Get Property Value    ${PROGRESS_SLIDER}    BoundingRectangle
+
+    # Calculate position within slider (0-100% maps to slider width)
+    ${relative_percent}=    Evaluate    ${target_value} / 100.0
+    ${click_x}=    Evaluate    ${rect.Width} * ${relative_percent}
+    ${click_y}=    Evaluate    ${rect.Height} / 2.0    # Click in vertical center
+
+    # Click at the calculated position
+    Mouse Click    ${PROGRESS_SLIDER}    ${click_x}    ${click_y}
+
+    # Small delay to allow UI to update
+    Sleep    0.2s
+
+Get Slider Value    # this keyword doesn't work properly yet
+    [Documentation]    Get the current value of the progress slider
+    Navigate To Controls Page
+    ${value}=    Get Property Value    ${PROGRESS_SLIDER}    value
+    RETURN    ${value}
+
 Navigate To About Page
     [Documentation]    Navigate to About page
     Mouse Click    ${WINDOW}//ListItem[@Name="About Page"]
