@@ -283,6 +283,27 @@ ApplicationWindow {
                     ToolTip.delay: 500
                 }
             }
+            
+            // Reset button
+            ToolButton {
+                id: resetButton
+                objectName: "resetButton"
+                text: "Reset"
+                icon.name: "view-refresh"
+                display: AbstractButton.TextBesideIcon
+                Accessible.name: "Reset Application"
+                Accessible.role: Accessible.Button
+                Accessible.description: "Reset application to initial state"
+                
+                onClicked: {
+                    AppState.reset()
+                    //stack.currentIndex = 0  // activate to navigate back to Controls page
+                }
+                
+                ToolTip.visible: hovered
+                ToolTip.text: "Reset to initial state"
+                ToolTip.delay: 500
+            }
         }
     }
 

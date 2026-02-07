@@ -7,6 +7,32 @@ Item {
     enabled: AppState.widgetsEnabled
     property bool isReadonly: AppState.widgetsReadonly
     
+    // Reset function to restore all controls to initial state
+    function reset() {
+        // Reset tab to first tab (With Word Wrap)
+        tabBar.currentIndex = 0
+        
+        // Reset text in both TextEdit widgets to original content
+        wrapTextEdit.text = "This is a TextEdit widget that allows for editing text spanning multiple paragraphs.\n\nThis line starts in a new paragraph."
+        nowrapTextEdit.text = "This is our TextEdit widget (No-Wrap). ".repeat(6)
+        
+        // Clear any text selection
+        wrapTextEdit.deselect()
+        nowrapTextEdit.deselect()
+        
+        // Reset cursor position to beginning
+        wrapTextEdit.cursorPosition = 0
+        nowrapTextEdit.cursorPosition = 0
+    }
+    
+    // Connect to AppState resetRequested signal
+    Connections {
+        target: AppState
+        function onResetRequested() {
+            reset()
+        }
+    }
+    
     ColumnLayout {
         anchors.fill: parent
         anchors.margins: 16

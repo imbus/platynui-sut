@@ -5,6 +5,40 @@ import QtQuick.Layouts
 Item {
     enabled: AppState.widgetsEnabled
     
+    // Reset function to restore all controls to initial state
+    function reset() {
+        // Clear filter text
+        filterField.text = ""
+        
+        // Reset sort state
+        tableModel.sortColumn = -1
+        tableModel.sortAscending = true
+        tableModel.filterText = ""
+        
+        // Reset table to original order and visibility
+        tableModel.clear()
+        for (var r = 1; r <= 11; r++) {
+            tableModel.append({
+                "col1": "Item " + r + ".1",
+                "col2": "Item " + r + ".2",
+                "col3": "Item " + r + ".3",
+                "col4": "Item " + r + ".4",
+                "visible": true
+            })
+        }
+        
+        // Reset table position to top
+        tableListView.positionViewAtBeginning()
+    }
+    
+    // Connect to AppState resetRequested signal
+    Connections {
+        target: AppState
+        function onResetRequested() {
+            reset()
+        }
+    }
+    
     ScrollView {
         anchors.fill: parent
         anchors.margins: 16

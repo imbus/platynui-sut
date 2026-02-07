@@ -5,6 +5,21 @@ import QtQuick.Layouts
 Item {
     enabled: AppState.widgetsEnabled
     
+    // Reset function - About page has no user-modifiable state
+    // but we include this for consistency and potential future use
+    function reset() {
+        // About page has no controls to reset
+        // This is just a placeholder for consistency or in the future added Elements
+    }
+    
+    // Connect to AppState resetRequested signal
+    Connections {
+        target: AppState
+        function onResetRequested() {
+            reset()
+        }
+    }
+    
     ScrollView {
         anchors.fill: parent
         contentWidth: availableWidth

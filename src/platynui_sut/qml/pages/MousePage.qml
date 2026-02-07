@@ -6,6 +6,35 @@ import ".."
 Item {
     enabled: AppState.widgetsEnabled
     
+    // Reset function to restore all controls to initial state
+    function reset() {
+        // Reset tracking controls
+        trackingEnabled.checked = true
+        colorCombo.currentIndex = 0  // Blue
+        
+        // Clear the trail
+        canvas.clearTrail()
+        
+        // Reset mouse coordinates display
+        mouseXLabel.text = "0"
+        mouseYLabel.text = "0"
+        
+        // Reset click counter
+        mouseArea.clickCount = 0
+        clickCounter.text = "0"
+        
+        // Hide double-click indicator
+        doubleClickLabel.opacity = 0
+    }
+    
+    // Connect to AppState resetRequested signal
+    Connections {
+        target: AppState
+        function onResetRequested() {
+            reset()
+        }
+    }
+    
     ColumnLayout {
         anchors.fill: parent
         anchors.margins: 16

@@ -5,6 +5,29 @@ import QtQuick.Layouts
 Item {
     enabled: AppState.widgetsEnabled
     
+    // Reset function to restore all controls to initial state
+    function reset() {
+        // Reset scroll bar policy combos
+        verticalPolicyCombo.currentIndex = 0  // "As Needed"
+        horizontalPolicyCombo.currentIndex = 0  // "As Needed"
+        
+        // Reset list view positions to top
+        leftListView.positionViewAtBeginning()
+        rightListView.positionViewAtBeginning()
+        
+        // Reset list view selections if any
+        leftListView.currentIndex = -1
+        rightListView.currentIndex = -1
+    }
+    
+    // Connect to AppState resetRequested signal
+    Connections {
+        target: AppState
+        function onResetRequested() {
+            reset()
+        }
+    }
+    
     ScrollView {
         anchors.fill: parent
         anchors.margins: 16

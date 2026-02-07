@@ -9,6 +9,42 @@ Item {
     // Apply readonly: make interactive widgets read-only but keep them visually enabled
     property bool isReadonly: AppState.widgetsReadonly
     
+    // Reset function to restore all controls to initial state
+    function reset() {
+        // CheckBox
+        checkedBox.checked = true
+        
+        // ComboBox
+        comboBox.currentIndex = 0
+        
+        // Switch
+        flightSwitch.checked = false
+        
+        // RadioButtons
+        radioSmall.checked = true
+        
+        // Date/Time SpinBoxes
+        day.value = 1
+        month.value = 1
+        year.value = 2025
+        hour.value = 12
+        minute.value = 0
+        
+        // Slider
+        slider.value = 30
+        
+        // Indeterminate checkbox
+        ind.checked = false
+    }
+    
+    // Connect to AppState resetRequested signal
+    Connections {
+        target: AppState
+        function onResetRequested() {
+            reset()
+        }
+    }
+    
     ScrollView {
         anchors.fill: parent
         anchors.margins: 16

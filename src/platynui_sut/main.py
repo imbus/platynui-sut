@@ -4,6 +4,8 @@ from PySide6.QtQml import QQmlApplicationEngine
 
 class AppState(QObject):
     changed = Signal()
+    resetRequested = Signal()
+    
     def __init__(self):
         super().__init__()
         self._dark = False
@@ -46,6 +48,16 @@ class AppState(QObject):
         if self._widgets_readonly != v:
             self._widgets_readonly = v
             self.changed.emit()
+
+    @Slot()
+    def reset(self):
+        """Reset application to initial state"""
+        self._dark = False
+        self._status = "Ready"
+        self._widgets_enabled = True
+        self._widgets_readonly = False
+        self.resetRequested.emit()
+        self.changed.emit()
 
 def main():
     app = QGuiApplication([])
