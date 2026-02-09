@@ -6,6 +6,41 @@ import ".."
 Item {
     enabled: AppState.widgetsEnabled
     
+    // Color model with detailed properties for automation
+    ListModel {
+        id: colorModel
+        ListElement {
+            name: "Blue"
+            value: "blue"
+            colorCode: "#2196F3"
+            accessibleId: "trailColor_blue"
+        }
+        ListElement {
+            name: "Red"
+                value: "red"
+                colorCode: "#F44336"
+            accessibleId: "trailColor_red"
+        }
+        ListElement {
+            name: "Green"
+            value: "green"
+            colorCode: "#4CAF50"
+            accessibleId: "trailColor_green"
+        }
+        ListElement {
+            name: "Purple"
+            value: "purple"
+            colorCode: "#9C27B0"
+            accessibleId: "trailColor_purple"
+        }
+        ListElement {
+            name: "Orange"
+            value: "orange"
+            colorCode: "#ee6d22e8"
+            accessibleId: "trailColor_orange"
+        }
+    }
+    
     // Reset function to restore all controls to initial state
     function reset() {
         // Reset tracking controls
@@ -80,8 +115,35 @@ Item {
                 ComboBox {
                     id: colorCombo
                     objectName: "trailColorCombo"
-                    model: ["Blue", "Red", "Green", "Purple", "Orange"]
+                    model: colorModel
+                    textRole: "name"
                     currentIndex: 0
+                    
+                    // Custom delegate with accessible properties
+                    delegate: ItemDelegate {
+                        width: colorCombo.width
+                        text: model.name
+                        
+                        // Set accessible properties for each item
+                        Accessible.name: model.name + " Color Option"
+                        Accessible.description: "Trail color: " + model.name
+                        
+                        // Optional: Visual color indicator
+                        Rectangle {
+                            anchors.left: parent.left
+                            anchors.leftMargin: 8
+                            anchors.verticalCenter: parent.verticalCenter
+                            width: 16
+                            height: 16
+                            radius: 8
+                            color: model.colorCode
+                            border.color: palette.mid
+                            border.width: 1
+                        }
+                        
+                        leftPadding: 32  // Space for color indicator
+                    }
+                    
                     Accessible.name: "Trail Color"
                     Accessible.role: Accessible.ComboBox
                 }
@@ -231,15 +293,10 @@ Item {
                     }
                     
                     function getTrailColor() {
-                        switch(colorCombo.currentIndex) {
-                            case 0: return "#2196F3" // Blue
-                            case 1: return "#F44336" // Red
-                            case 2: return "#4CAF50" // Green
-                            case 3: return "#9C27B0" // Purple
-                            case 4: return "#FF9800" // Orange
-                            case 5: return "#430f3aff" // Default White
-                            default: return "#2196F3"
+                        if (colorCombo.currentIndex >= 0 && colorCombo.currentIndex < colorModel.count) {
+                            return colorModel.get(colorCombo.currentIndex).colorCode
                         }
+                        return "#2196F3" // Default blue
                     }
                     
                     onPaint: {
