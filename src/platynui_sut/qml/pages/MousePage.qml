@@ -13,31 +13,31 @@ Item {
             name: "Blue"
             value: "blue"
             colorCode: "#2196F3"
-            accessible.name: "trailColor_blue"
+            accessibleId: "trailColor_blue"
         }
         ListElement {
             name: "Red"
-                value: "red"
-                colorCode: "#F44336"
-            accessible.name: "trailColor_red"
+            value: "red"
+            colorCode: "#F44336"
+            accessibleId: "trailColor_red"
         }
         ListElement {
             name: "Green"
             value: "green"
             colorCode: "#4CAF50"
-            accessible.name: "trailColor_green"
+            accessibleId: "trailColor_green"
         }
         ListElement {
             name: "Purple"
             value: "purple"
             colorCode: "#9C27B0"
-            accessible.name: "trailColor_purple"
+            accessibleId: "trailColor_purple"
         }
         ListElement {
             name: "Orange"
             value: "orange"
             colorCode: "#e26c28"
-            accessible.name: "trailColor_orange"
+            accessibleId: "trailColor_orange"
         }
     }
     
