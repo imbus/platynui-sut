@@ -123,6 +123,7 @@ Item {
                     delegate: ItemDelegate {
                         width: colorCombo.width
                         text: model.name
+                        highlighted: colorCombo.highlightedIndex === index
                         
                         // Set accessible properties for each item
                         Accessible.name: model.name + " Color Option"
@@ -139,6 +140,7 @@ Item {
                             color: model.colorCode
                             border.color: palette.mid
                             border.width: 1
+                            enabled: false  // Don't intercept mouse/keyboard events
                         }
                         
                         leftPadding: 32  // Space for color indicator
