@@ -36,7 +36,7 @@ Item {
         ListElement {
             name: "Orange"
             value: "orange"
-            colorCode: "#ee6d22e8"
+            colorCode: "#e26c28"
             accessibleId: "trailColor_orange"
         }
     }
